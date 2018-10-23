@@ -547,13 +547,8 @@ class Orders(MWS):
         Deprecated.
         Use `list_orders(next_token=token)` instead.
         """
-        # data = dict(Action='ListOrdersByNextToken', NextToken=token)
-        # return self.make_request(data)
-        warnings.warn(
-            "Use `list_orders(next_token=token)` instead.",
-            DeprecationWarning,
-        )
-        return self.list_orders(next_token=token)
+        data = dict(Action='ListOrdersByNextToken', NextToken=token)
+        return self.make_request(data)
 
     def get_order(self, amazon_order_ids):
         data = dict(Action='GetOrder')
