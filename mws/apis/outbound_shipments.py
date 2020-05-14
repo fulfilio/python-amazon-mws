@@ -88,14 +88,18 @@ class OutboundShipments(MWS):
         """
         raise NotImplementedError
 
-    def get_fulfillment_order(self):
+    def get_fulfillment_order(self, shipment_id):
         """
         Returns a fulfillment order based on a specified SellerFulfillmentOrderId.
 
         Docs:
         http://docs.developer.amazonservices.com/en_US/fba_outbound/FBAOutbound_GetFulfillmentOrder.html
         """
-        raise NotImplementedError
+        data = {
+            'Action': 'GetFulfillmentOrder',
+            'SellerFulfillmentOrderId': shipment_id,
+        }
+        return self.make_request(data)
 
     @next_token_action('ListAllFulfillmentOrders')
     def list_all_fulfillment_orders(self, next_token=None):
